@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +10,8 @@
         <p><h1>Home page</h1></p>
 
         <p>Greetings, <b>${login}</b></p>
-        <h2><a href="/employees"></a></h2>
-        <h2><a href="/logout"></a></h2>
-        <h2><a href=""></a></h2>
+        <h2><a href="/get-employee"></a></h2>
+        <h2><a href="/logout"></a></h2>        
     </div>
 </body>
 </html>

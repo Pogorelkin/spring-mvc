@@ -1,23 +1,24 @@
 package com.springmvc;
 
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.*;
 
 public class WebAppInitializer implements WebApplicationInitializer {
 
-    public static final String[] VIEW_LIST = {"/", "/home", "/login","/logout","/employees"};
-
     @Override
-    public void onStartup(ServletContext container) throws ServletException {
-        XmlWebApplicationContext applicationContext = new XmlWebApplicationContext();
-        applicationContext.setConfigLocation("/WEB-INF/web.xml");
-                 context.setConfigLocation("com.springmvc");
-                container.addListener(new ContextLoaderListener(context));
-                ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(context));
-                 dispatcher.setLoadOnStartup(1);
-                 dispatcher.addMapping(VIEW_LIST);
+    public void onStartup(ServletContext container) {
+        AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
+         applicationContext.setConfigLocation("com.springmvc");
+                container.addListener(new ContextLoaderListener(applicationContext));
+                ServletRegistration.Dynamic servlet = container.addServlet("springDispatcherServlet", new DispatcherServlet(applicationContext));
+                servlet.setLoadOnStartup(1);
+                servlet.addMapping("/");
     }
 }

@@ -35,6 +35,7 @@ public class UserRepositoryImpl implements UserRepository {
         userList.remove(id);
     }
 
+    @Override
     @PostConstruct
     public void initUsers() {
         userList.add(new User(userCounter.getAndIncrement(), "login1", "password1"));

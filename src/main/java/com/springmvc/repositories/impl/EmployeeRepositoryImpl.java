@@ -4,6 +4,7 @@ import com.springmvc.entities.Employee;
 import com.springmvc.repositories.EmployeeRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,6 +40,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         employeeList.set(employee.getEmployeeId(), employee);
     }
 
+    @PostConstruct
     @Override
     public void initEmployees() {
         employeeList.add(new Employee(employeeCounter.getAndIncrement(),"Ivan", "Ivanov", 111));

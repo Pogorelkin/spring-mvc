@@ -7,9 +7,9 @@
     </head>
     <body>
         <div>
-            <form action="/get-employee" method="post">
+            <form action="../get-employee" method="post">
                 <label for="id">ID: </label>
-                <input type="text" name="id" required>
+                <input type="text" name="id" placeholder="input id" required>
                 <button type="submit">Get</button>
             </form>
             <a href='/home'>Home</a>

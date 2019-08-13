@@ -2,7 +2,6 @@ package com.springmvc.controllers;
 
 import com.springmvc.entities.Employee;
 import com.springmvc.services.EmployeeService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +42,7 @@ public class EmployeeController {
         return new ModelAndView("get-employee");
     }
 
-    @PostMapping("/get-employee")
+    @PostMapping("/")
     private ModelAndView getEmployeeById(@RequestParam("id") int id) {
         ModelAndView modelAndView = new ModelAndView("employees");
         modelAndView.addObject(employeeService.getEmployeeById(id));

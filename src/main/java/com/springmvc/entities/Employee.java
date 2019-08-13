@@ -1,5 +1,8 @@
 package com.springmvc.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Employee {
     private int employeeId;
     private String firstName;
@@ -11,6 +14,9 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
         this.idCardNumber = idCardNumber;
+    }
+
+    public Employee() {
     }
 
     public int getEmployeeId() {

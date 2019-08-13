@@ -1,5 +1,8 @@
 package com.springmvc.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
     private int userId;
     private String login;

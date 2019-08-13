@@ -8,9 +8,10 @@
 <body>
     <div>
         <p><h1>Home page</h1></p>
-
         <p>Greetings, <b>${login}</b></p>
-        <h2><a href="/get-employee"></a></h2>
+        <h2><a href="/employees">All</a></h2>
+        <h2><a href="/employee/get">Get</a></h2>
+        <h2><a href="/employee/add">Get</a></h2>
         <h2><a href="/logout"></a></h2>        
     </div>
 </body>

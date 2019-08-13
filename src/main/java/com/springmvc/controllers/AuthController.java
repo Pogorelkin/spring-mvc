@@ -18,7 +18,7 @@ public class AuthController {
         return new ModelAndView("redirect:login");
     }
 
-    @RequestMapping("/home")
+    @RequestMapping("/index")
     private ModelAndView homePage(HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("login",session.getAttribute("login"));
@@ -35,7 +35,7 @@ public class AuthController {
     private ModelAndView login(@RequestParam("login") String login, HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
         session.setAttribute("login", login);
-        modelAndView.setViewName("redirect:home");
+        modelAndView.setViewName("redirect:index");
 
         return modelAndView;
     }

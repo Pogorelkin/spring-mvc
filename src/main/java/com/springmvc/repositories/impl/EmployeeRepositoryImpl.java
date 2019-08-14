@@ -27,12 +27,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public Employee getEmployeeById(int id) {
-        return employeeList.get(id);
+        return employeeList.get(id-1);
     }
 
     @Override
     public void deleteEmployeeById(int id) {
-        employeeList.remove(id);
+        employeeList.remove(id-1);
     }
 
     @Override

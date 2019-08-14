@@ -2,6 +2,7 @@ package com.springmvc.repositories.impl;
 
 import com.springmvc.entities.Employee;
 import com.springmvc.repositories.EmployeeRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import static com.springmvc.counter.AtomicCounter.employeeCounter;
 
+@Cacheable("employees")
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
     private List<Employee> employeeList = Collections.synchronizedList(new ArrayList<>());
@@ -20,20 +22,23 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         employeeList.add(employee);
     }
 
+    @Cacheable
     @Override
     public List<Employee> getAllEmployees() {
         return employeeList;
     }
 
+    @Cacheable(key = "#id")
     @Override
     public Employee getEmployeeById(int id) {
-        return employeeList.get(id-1);
+        return employeeList.get(id - 1);
     }
 
     @Override
     public void deleteEmployeeById(int id) {
-        employeeList.remove(id-1);
+        employeeList.remove(id - 1);
     }
+
 
     @Override
     public void updateEmployee(Employee employee) {
@@ -43,8 +48,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @PostConstruct
     @Override
     public void initEmployees() {
-        employeeList.add(new Employee(employeeCounter.getAndIncrement(),"Ivan", "Ivanov", 111));
-        employeeList.add(new Employee(employeeCounter.getAndIncrement(),"Stepan", "Stepanov", 222));
-        employeeList.add(new Employee(employeeCounter.getAndIncrement(),"Vasily", "Vasiliev", 333));
+        employeeList.add(new Employee(employeeCounter.getAndIncrement(), "Ivan", "Ivanov", 111));
+        employeeList.add(new Employee(employeeCounter.getAndIncrement(), "Stepan", "Stepanov", 222));
+        employeeList.add(new Employee(employeeCounter.getAndIncrement(), "Vasily", "Vasiliev", 333));
     }
 }

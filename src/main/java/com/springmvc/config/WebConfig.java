@@ -1,5 +1,6 @@
 package com.springmvc.config;
 
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
+@EnableCaching
 @ComponentScan(basePackages = {"com.springmvc"})
 public class WebConfig implements WebMvcConfigurer {
 

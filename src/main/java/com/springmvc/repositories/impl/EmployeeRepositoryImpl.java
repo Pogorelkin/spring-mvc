@@ -22,13 +22,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         employeeList.add(employee);
     }
 
-    @Cacheable
+    @Cacheable(value = "employees")
     @Override
     public List<Employee> getAllEmployees() {
         return employeeList;
     }
 
-    @Cacheable(key = "#id")
+    @Cacheable(value = "employees", key = "#id")
     @Override
     public Employee getEmployeeById(int id) {
         return employeeList.get(id - 1);

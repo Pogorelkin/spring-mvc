@@ -4,14 +4,12 @@ import com.springmvc.entities.Employee;
 import com.springmvc.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 public class EmployeeControllerREST {
     @Autowired
     private EmployeeService employeeService;
-
 
     @GetMapping("/employee/{employeeId}")
     private @ResponseBody

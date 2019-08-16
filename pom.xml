@@ -10,6 +10,7 @@
     <properties>
         <maven.compiler>1.8</maven.compiler>
         <springframework.version>5.1.9.RELEASE</springframework.version>
+        <jetty.version>9.4.19.v20190610</jetty.version>>
     </properties>
 
     <dependencies>
@@ -68,6 +69,24 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>5.1.8.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jetty.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>${jetty.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

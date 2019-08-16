@@ -60,6 +60,3 @@ public class SpringRestControllerTest extends AbstractJUnit4SpringContextTests {
         assertNotNull(employeeService.getEmployeeById(4));
     }
 }
-
-
-

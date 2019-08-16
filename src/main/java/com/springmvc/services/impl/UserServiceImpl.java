@@ -32,6 +32,4 @@ public class UserServiceImpl implements UserService {
     public void deleteUserById(int id) {
         userRepository.deleteUserById(id);
     }
-
-
 }

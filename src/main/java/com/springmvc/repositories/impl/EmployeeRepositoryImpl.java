@@ -39,7 +39,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         employeeList.remove(id - 1);
     }
 
-
     @Override
     public void updateEmployee(Employee employee) {
         employeeList.set(employee.getEmployeeId(), employee);

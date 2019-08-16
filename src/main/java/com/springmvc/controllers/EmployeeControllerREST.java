@@ -12,7 +12,6 @@ public class EmployeeControllerREST {
     @Autowired
     private EmployeeService employeeService;
 
-
     @GetMapping("/employee/{employeeId}")
     private @ResponseBody
     Employee getEmployee(@PathVariable int employeeId) {

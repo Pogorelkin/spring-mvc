@@ -47,5 +47,4 @@ public class AuthController {
         request.getSession().invalidate();
         return modelAndView;
     }
-
 }

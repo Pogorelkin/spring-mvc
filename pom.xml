@@ -10,7 +10,7 @@
     <properties>
         <maven.compiler>1.8</maven.compiler>
         <springframework.version>5.1.9.RELEASE</springframework.version>
-        <jetty.version>9.4.19.v20190610</jetty.version>>
+        <jetty.version>9.4.19.v20190610</jetty.version>
     </properties>
 
     <dependencies>
@@ -71,6 +71,11 @@
             <version>5.1.8.RELEASE</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-core</artifactId>
+            <version>3.0.7.RELEASE</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
@@ -87,6 +92,12 @@
             <artifactId>jetty-webapp</artifactId>
             <version>${jetty.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>10.0.0-alpha0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -110,6 +121,25 @@
                     <httpConnector>
                         <port>8081</port>
                     </httpConnector>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
+                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                    <clearOutputDir>false</clearOutputDir>
                 </configuration>
             </plugin>
         </plugins>

@@ -12,11 +12,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+
 @Configuration
 @EnableWebMvc
 @EnableCaching
 @ComponentScan(basePackages = {"com.springmvc"})
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig  implements WebMvcConfigurer  {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -37,5 +38,6 @@ public class WebConfig implements WebMvcConfigurer {
     public CacheManager cacheManager() {
         return new ConcurrentMapCacheManager("employees");
     }
-}
 
+
+}

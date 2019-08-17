@@ -2,10 +2,24 @@ package com.springmvc.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "employee", propOrder = {
+        "employeeId",
+        "firstName",
+        "lastName",
+        "idCardNumber"
+})
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Employee {
     private int employeeId;
+    @XmlElement(required = true)
     private String firstName;
+    @XmlElement(required = true)
     private String lastName;
     private long idCardNumber;
 

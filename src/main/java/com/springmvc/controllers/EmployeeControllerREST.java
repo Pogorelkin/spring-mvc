@@ -13,16 +13,13 @@ public class EmployeeControllerREST {
     private EmployeeService employeeService;
 
     @GetMapping("/employee/{employeeId}")
-    private @ResponseBody
-    Employee getEmployee(@PathVariable int employeeId) {
+    private Employee getEmployee(@PathVariable int employeeId) {
         return employeeService.getEmployeeById(employeeId);
     }
 
     @PostMapping("/employee")
-    private @ResponseBody
-    Employee addEmployee(@RequestBody Employee employee) {
+    private Employee addEmployee(@RequestBody Employee employee) {
         employeeService.addEmployee(employee);
-
         return employee;
     }
 
@@ -38,8 +35,7 @@ public class EmployeeControllerREST {
     }
 
     @GetMapping("/employee/all")
-    private @ResponseBody
-    List<Employee> getEmployees() {
+    private List<Employee> getEmployees() {
         return employeeService.getAllEmployees();
     }
 }

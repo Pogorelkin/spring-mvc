@@ -2,6 +2,7 @@ package com.springmvc.repositories.impl;
 
 import com.springmvc.entities.Employee;
 import com.springmvc.repositories.EmployeeRepository;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
@@ -35,11 +36,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
+    @CacheEvict(value = "employees", key = "#id")
     public void deleteEmployeeById(int id) {
         employeeList.remove(id - 1);
     }
 
     @Override
+    @CacheEvict(value = "employees")
     public void updateEmployee(Employee employee) {
         employeeList.set(employee.getEmployeeId(), employee);
     }

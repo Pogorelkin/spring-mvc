@@ -2,56 +2,50 @@ package com.springmvc.repositories.impl;
 
 import com.springmvc.entities.Employee;
 import com.springmvc.repositories.EmployeeRepository;
+import com.springmvc.repositories.mappers.EmployeeMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import static com.springmvc.counter.AtomicCounter.employeeCounter;
-
-@Cacheable("employees")
 @Repository
+@CacheConfig(cacheNames = "employees")
 public class EmployeeRepositoryImpl implements EmployeeRepository {
-    private List<Employee> employeeList = Collections.synchronizedList(new ArrayList<>());
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     @Override
-    public void addEmployee(Employee employee) {
-        employeeList.add(employee);
-    }
-
-    @Cacheable(value = "employees")
-    @Override
-    public List<Employee> getAllEmployees() {
-        return employeeList;
-    }
-
-    @Cacheable(value = "employees", key = "#id")
-    @Override
-    public Employee getEmployeeById(int id) {
-        return employeeList.get(id - 1);
+    @Cacheable
+    public List<Employee> findAll() {
+        return jdbcTemplate.query("SELECT * FROM Employees", new EmployeeMapper());
     }
 
     @Override
-    @CacheEvict(value = "employees", key = "#id")
-    public void deleteEmployeeById(int id) {
-        employeeList.remove(id - 1);
+    @Cacheable(key = "#id")
+    public Employee findById(long id) {
+        return jdbcTemplate.queryForObject("SELECT * FROM Employees WHERE employeeId = ?", new Object[]{id}, new EmployeeMapper());
     }
 
     @Override
-    @CacheEvict(value = "employees")
-    public void updateEmployee(Employee employee) {
-        employeeList.set(employee.getEmployeeId(), employee);
+    public long add(Employee entity) {
+        return jdbcTemplate.update("INSERT INTO Employees(firstName, lastName, idCardNumber) VALUES (?,?,?,)",
+                entity.getEmployeeId(), entity.getFirstName(), entity.getLastName(), entity.getIdCardNumber());
     }
 
-    @PostConstruct
     @Override
-    public void initEmployees() {
-        employeeList.add(new Employee(employeeCounter.getAndIncrement(), "Ivan", "Ivanov", 111));
-        employeeList.add(new Employee(employeeCounter.getAndIncrement(), "Stepan", "Stepanov", 222));
-        employeeList.add(new Employee(employeeCounter.getAndIncrement(), "Vasily", "Vasiliev", 333));
+    @CacheEvict(key = "#id")
+    public long update(long id, Employee entity) {
+        return jdbcTemplate.update("UPDATE Employees SET firstName = ?, lastName = ?, idcardNumber = ? WHERE employeeId = ?",
+                entity.getFirstName(), entity.getLastName(), entity.getIdCardNumber(), id);
+    }
+
+    @Override
+    @CacheEvict(key = "#id")
+    public long deleteById(long id) {
+        return jdbcTemplate.update("DELETE FROM Employees WHERE employeeId = ? ", id);
     }
 }

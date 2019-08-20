@@ -2,44 +2,48 @@ package com.springmvc.repositories.impl;
 
 import com.springmvc.entities.User;
 import com.springmvc.repositories.UserRepository;
+import com.springmvc.repositories.mappers.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import static com.springmvc.counter.AtomicCounter.userCounter;
-
 @Repository
+@CacheConfig(cacheNames = "users")
 public class UserRepositoryImpl implements UserRepository {
-    private List<User> userList = Collections.synchronizedList(new ArrayList<>());
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
+    @Cacheable
     @Override
-    public void addUser(User user) {
-        userList.add(user);
+    public List<User> findAll() {
+        return jdbcTemplate.query("SELECT * FROM Users", new UserMapper());
+    }
+
+    @Cacheable(key = "#id")
+    @Override
+    public User findById(long id) {
+        return jdbcTemplate.queryForObject("SELECT FROM Users WHERE userId = ?", new Object[]{id}, new UserMapper());
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userList;
+    public long add(User entity) {
+        return jdbcTemplate.update("INSERT INTO Users(login, password) VALUES (?,?)", entity.getLogin(), entity.getPassword());
     }
 
+    @CacheEvict(key = "#id")
     @Override
-    public User getUserById(int id) {
-        return userList.get(id);
+    public long update(long id, User entity) {
+        return jdbcTemplate.update("UPDATE Users SET login = ?, password = ? where userId = ?", entity.getLogin(), entity.getPassword(), id);
     }
 
+    @CacheEvict(key = "#id")
     @Override
-    public void deleteUserById(int id) {
-        userList.remove(id);
-    }
-
-    @Override
-    @PostConstruct
-    public void initUsers() {
-        userList.add(new User(userCounter.getAndIncrement(), "login1", "password1"));
-        userList.add(new User(userCounter.getAndIncrement(), "maLoGiN", "P@ssW0rD"));
-        userList.add(new User(userCounter.getAndIncrement(), "1ogin", "123123"));
+    public long deleteById(long id) {
+        return jdbcTemplate.update("DELETE FROM Users WHERE userId = ?", id);
     }
 }

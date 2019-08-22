@@ -18,5 +18,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
                 ServletRegistration.Dynamic servlet = container.addServlet("springDispatcherServlet", new DispatcherServlet(applicationContext));
                 servlet.setLoadOnStartup(1);
                 servlet.addMapping("/");
+                container.setInitParameter("spring.profile.active", "jpa");
     }
 }

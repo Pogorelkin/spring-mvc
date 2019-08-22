@@ -2,13 +2,27 @@ package com.springmvc.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 
+@Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Employee implements Serializable {
-    private int employeeId;
+    @Id
+    @GeneratedValue
+    @Column(name = "employeeId")
+    private long employeeId;
+
+    @Column(name = "firstName")
     private String firstName;
+
+    @Column(name = "lastName")
     private String lastName;
+
+    @Column(name = "idCardNumber")
     private long idCardNumber;
 
     public Employee(int employeeId, String firstName, String lastName, long idCardNumber) {
@@ -21,11 +35,11 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public int getEmployeeId() {
+    public long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(long employeeId) {
         this.employeeId = employeeId;
     }
 

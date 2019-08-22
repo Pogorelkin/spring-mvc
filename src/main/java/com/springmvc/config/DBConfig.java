@@ -1,5 +1,6 @@
 package com.springmvc.config;
 
+import com.springmvc.utils.HibernateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,8 +17,6 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = "com.springmvc")
 @PropertySource(value = {"classpath:application.properties"})
 public class DBConfig {
-    @Autowired
-    private Environment environment;
 
     @Value("${spring.datasource.url}")
     private String jdbcURl;
@@ -41,10 +40,14 @@ public class DBConfig {
     }
 
     @Bean
+    public HibernateUtil hibernateUtil(){
+        return new HibernateUtil();
+    }
+
+    @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.setResultsMapCaseInsensitive(true);
         return jdbcTemplate;
     }
 }
-

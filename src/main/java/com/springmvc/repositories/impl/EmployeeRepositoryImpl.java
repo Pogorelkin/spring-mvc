@@ -4,6 +4,7 @@ import com.springmvc.entities.Employee;
 import com.springmvc.repositories.EmployeeRepository;
 import com.springmvc.repositories.mappers.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Repository
 @CacheConfig(cacheNames = "employees")
-@Profile("jdpcT")
+@Qualifier("jdpcT")
 public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;

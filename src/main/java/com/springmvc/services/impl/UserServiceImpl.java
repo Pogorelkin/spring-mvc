@@ -4,6 +4,7 @@ import com.springmvc.entities.User;
 import com.springmvc.repositories.UserRepository;
 import com.springmvc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
+    @Qualifier("jpa")
     private UserRepository userRepository;
 
     @Override

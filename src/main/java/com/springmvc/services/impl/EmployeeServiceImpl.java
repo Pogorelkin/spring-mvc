@@ -4,6 +4,7 @@ import com.springmvc.entities.Employee;
 import com.springmvc.repositories.EmployeeRepository;
 import com.springmvc.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
+    @Qualifier("jpa")
     private EmployeeRepository employeeRepository;
 
     @Override

@@ -4,6 +4,7 @@ import com.springmvc.entities.User;
 import com.springmvc.repositories.UserRepository;
 import com.springmvc.repositories.mappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Repository
 @CacheConfig(cacheNames = "users")
-@Profile("jdpcT")
+@Qualifier("jdpcT")
 public class UserRepositoryImpl implements UserRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;

@@ -7,19 +7,19 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository()
-@Profile("jpa")
+@Qualifier("jpa")
 @CacheConfig(cacheNames = "users")
 public class UserRepositoryHibernateImpl implements UserRepository {
-   private Logger logger = LoggerFactory.getLogger(UserRepositoryHibernateImpl.class);
+    private Logger logger = LoggerFactory.getLogger(UserRepositoryHibernateImpl.class);
 
     @Cacheable
     @Override
@@ -81,7 +81,7 @@ public class UserRepositoryHibernateImpl implements UserRepository {
         long rows = 0;
         try (final Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            Query query = session.createQuery("from User e where e.id = " + id);
+            Query query = session.createQuery(String.format("from User e where e.id = %d", id));
             rows = (long) query.executeUpdate();
         } catch (Exception e) {
             logger.error(e.getMessage());

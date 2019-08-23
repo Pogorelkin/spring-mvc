@@ -39,10 +39,10 @@ public class DBConfig {
         return dataSource;
     }
 
-    @Bean
+  /*  @Bean
     public HibernateUtil hibernateUtil(){
         return new HibernateUtil();
-    }
+    }*/
 
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {

@@ -5,7 +5,7 @@
         <script>
              function getAllEmployees() {
                         $.ajax({
-                            url: "http://localhost:8081/employee",
+                            url: "http://localhost:8082/employees",
                             method: "GET",
                             dataType: "json",
                             success: function (data) {
@@ -23,7 +23,7 @@
 
             function deleteEmployee(id){
                 $.ajax({
-                    url: 'http://localhost:8081/employee/'+id,
+                    url: 'http://localhost:8082/employees/'+id,
                     method: 'DELETE',
                     success: function () {
                         alert('employee has been deleted');

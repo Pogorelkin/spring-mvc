@@ -67,7 +67,7 @@ public class EmployeeRepositoryHibernateImpl implements EmployeeRepository {
     @CacheEvict(key = "#id")
     public long update(long id, Employee entity) {
         long rows = 0;
-        try (final Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             entity.setEmployeeId(id);
             rows = (long) session.save(entity);

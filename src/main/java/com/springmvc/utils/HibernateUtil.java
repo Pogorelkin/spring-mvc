@@ -9,17 +9,16 @@ import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.annotation.PostConstruct;
 import java.util.Properties;
 
-@Component
-public final class HibernateUtil {
+@PropertySource(value = {"classpath:application.properties"})
+public class HibernateUtil {
     private static Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
 
     public HibernateUtil() {
-        //throw new IllegalStateException("HibernateUtil is utility class");
     }
 
     @Value("${spring.datasource.url}")
@@ -37,8 +36,7 @@ public final class HibernateUtil {
     private static SessionFactory sessionFactory;
 
     @PostConstruct
-    private static SessionFactory buildSessionFactory() {
-        if (sessionFactory == null) {
+    public static void buildSessionFactory() {
             try {
                 org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration();
                 Properties properties = new Properties();
@@ -49,7 +47,6 @@ public final class HibernateUtil {
                 properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
                 properties.put(Environment.SHOW_SQL, "true");
                 properties.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-                properties.put(Environment.HBM2DDL_AUTO, "create-drop");
                 configuration.setProperties(properties);
                 configuration.addAnnotatedClass(Employee.class);
                 configuration.addAnnotatedClass(User.class);
@@ -58,8 +55,6 @@ public final class HibernateUtil {
             } catch (Exception e) {
                 logger.error(e.getMessage());
             }
-        }
-        return sessionFactory;
     }
 
     public static SessionFactory getSessionFactory() {
@@ -67,7 +62,6 @@ public final class HibernateUtil {
     }
 
     public static void shutdown() {
-        System.out.println(getSessionFactory().toString());
         getSessionFactory().close();
     }
 }

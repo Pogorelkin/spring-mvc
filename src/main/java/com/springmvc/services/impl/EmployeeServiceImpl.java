@@ -1,7 +1,7 @@
 package com.springmvc.services.impl;
 
 import com.springmvc.entities.Employee;
-import com.springmvc.repositories.EmployeeRepository;
+import com.springmvc.dao.EmployeeDAO;
 import com.springmvc.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +13,7 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     @Qualifier("jpa")
-    private EmployeeRepository employeeRepository;
+    private EmployeeDAO employeeRepository;
 
     @Override
     public void addEmployee(Employee employee) {

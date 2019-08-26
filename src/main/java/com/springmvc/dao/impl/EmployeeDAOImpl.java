@@ -1,14 +1,12 @@
-package com.springmvc.repositories.impl;
+package com.springmvc.dao.impl;
 
 import com.springmvc.entities.Employee;
-import com.springmvc.repositories.EmployeeRepository;
-import com.springmvc.repositories.mappers.EmployeeMapper;
+import com.springmvc.dao.EmployeeDAO;
+import com.springmvc.dao.mappers.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,10 +14,9 @@ import java.util.List;
 
 @Repository
 @CacheConfig(cacheNames = "employees")
-@Qualifier("jdpcT")
-public class EmployeeRepositoryImpl implements EmployeeRepository {
+public class EmployeeDAOImpl implements EmployeeDAO {
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     @Cacheable
@@ -34,9 +31,10 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
+    @CacheEvict
     public long add(Employee entity) {
-        return jdbcTemplate.update("INSERT INTO Employees(firstName, lastName, idCardNumber) VALUES (?,?,?,)",
-                entity.getEmployeeId(), entity.getFirstName(), entity.getLastName(), entity.getIdCardNumber());
+        return jdbcTemplate.update("INSERT INTO Employees(firstName, lastName, idCardNumber) VALUES (?,?,?)",
+                entity.getFirstName(), entity.getLastName(), entity.getIdCardNumber());
     }
 
     @Override

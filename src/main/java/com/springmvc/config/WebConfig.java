@@ -14,7 +14,6 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @EnableCaching
 @ComponentScan(basePackages = {"com.springmvc"})
-@Import({DBConfig.class})
 @Profile("jpa")
 public class WebConfig implements WebMvcConfigurer {
 

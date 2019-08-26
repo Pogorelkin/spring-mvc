@@ -1,4 +1,4 @@
-package com.springmvc.repositories.mappers;
+package com.springmvc.dao.mappers;
 
 import com.springmvc.entities.User;
 import org.springframework.jdbc.core.RowMapper;

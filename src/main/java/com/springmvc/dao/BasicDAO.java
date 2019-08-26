@@ -1,4 +1,4 @@
-package com.springmvc.repositories;
+package com.springmvc.dao;
 
 import java.util.List;
 

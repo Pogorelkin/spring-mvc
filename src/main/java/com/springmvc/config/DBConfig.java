@@ -16,8 +16,6 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = "com.springmvc")
 @PropertySource(value = {"classpath:application.properties"})
 public class DBConfig {
-    @Autowired
-    private Environment environment;
 
     @Value("${spring.datasource.url}")
     private String jdbcURl;
@@ -47,4 +45,3 @@ public class DBConfig {
         return jdbcTemplate;
     }
 }
-

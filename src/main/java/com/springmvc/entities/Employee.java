@@ -18,6 +18,12 @@ public class Employee implements Serializable {
         this.idCardNumber = idCardNumber;
     }
 
+    public Employee(String firstName, String lastName, long idCardNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.idCardNumber = idCardNumber;
+    }
+
     public Employee() {
     }
 

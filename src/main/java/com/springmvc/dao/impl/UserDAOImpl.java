@@ -16,7 +16,7 @@ import java.util.List;
 @CacheConfig(cacheNames = "users")
 public class UserRepositoryImpl implements UserRepository {
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Cacheable
     @Override

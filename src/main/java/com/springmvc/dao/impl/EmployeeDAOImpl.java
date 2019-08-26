@@ -16,7 +16,7 @@ import java.util.List;
 @CacheConfig(cacheNames = "employees")
 public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     @Cacheable
@@ -31,9 +31,10 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
+    @CacheEvict
     public long add(Employee entity) {
-        return jdbcTemplate.update("INSERT INTO Employees(firstName, lastName, idCardNumber) VALUES (?,?,?,)",
-                entity.getEmployeeId(), entity.getFirstName(), entity.getLastName(), entity.getIdCardNumber());
+        return jdbcTemplate.update("INSERT INTO Employees(firstName, lastName, idCardNumber) VALUES (?,?,?)",
+                entity.getFirstName(), entity.getLastName(), entity.getIdCardNumber());
     }
 
     @Override

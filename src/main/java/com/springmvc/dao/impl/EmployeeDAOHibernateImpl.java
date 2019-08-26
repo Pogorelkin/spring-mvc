@@ -50,7 +50,6 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
             query.setParameter("id", id);
             logger.info(query.toString());
             return (Employee) query.uniqueResult();
-
         } catch (Exception ex) {
             throw new DAOException("Couldn't get Employee from DB with id = " + id, ex.getCause());
         }

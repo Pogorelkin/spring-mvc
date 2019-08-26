@@ -49,6 +49,4 @@ public class DBConfig {
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         return hibernateProperties;
     }
-
-
 }

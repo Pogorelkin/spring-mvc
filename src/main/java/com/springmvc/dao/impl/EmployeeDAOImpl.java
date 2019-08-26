@@ -1,8 +1,10 @@
-package com.springmvc.repositories.impl;
 
+package com.springmvc.dao.impl;
+
+import com.springmvc.dao.EmployeeDAO;
+import com.springmvc.dao.mappers.EmployeeMapper;
 import com.springmvc.entities.Employee;
-import com.springmvc.repositories.EmployeeRepository;
-import com.springmvc.repositories.mappers.EmployeeMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -14,7 +16,9 @@ import java.util.List;
 
 @Repository
 @CacheConfig(cacheNames = "employees")
-public class EmployeeRepositoryImpl implements EmployeeRepository {
+
+public class EmployeeDAOImpl implements EmployeeDAO {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

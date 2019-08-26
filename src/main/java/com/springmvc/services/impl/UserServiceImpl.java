@@ -1,7 +1,7 @@
 package com.springmvc.services.impl;
 
-import com.springmvc.entities.User;
 import com.springmvc.dao.UserDAO;
+import com.springmvc.entities.User;
 import com.springmvc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,12 +24,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUserById(long id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public void deleteUserById(int id) {
+    public void deleteUserById(long id) {
         userRepository.deleteById(id);
     }
 }

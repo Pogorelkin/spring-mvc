@@ -1,8 +1,10 @@
-package com.springmvc.repositories.impl;
 
+package com.springmvc.dao.impl;
+
+import com.springmvc.dao.UserDAO;
+import com.springmvc.dao.mappers.UserMapper;
 import com.springmvc.entities.User;
-import com.springmvc.repositories.UserRepository;
-import com.springmvc.repositories.mappers.UserMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -14,7 +16,9 @@ import java.util.List;
 
 @Repository
 @CacheConfig(cacheNames = "users")
-public class UserRepositoryImpl implements UserRepository {
+
+public class UserDAOImpl implements UserDAO {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

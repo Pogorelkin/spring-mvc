@@ -2,8 +2,10 @@ package com.springmvc.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Employee {
+public class Employee implements Serializable {
     private int employeeId;
     private String firstName;
     private String lastName;
@@ -11,6 +13,12 @@ public class Employee {
 
     public Employee(int employeeId, String firstName, String lastName, long idCardNumber) {
         this.employeeId = employeeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.idCardNumber = idCardNumber;
+    }
+
+    public Employee(String firstName, String lastName, long idCardNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.idCardNumber = idCardNumber;

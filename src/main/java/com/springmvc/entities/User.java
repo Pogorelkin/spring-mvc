@@ -2,8 +2,10 @@ package com.springmvc.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class User {
+public class User implements Serializable {
     private int userId;
     private String login;
     private String password;

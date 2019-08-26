@@ -2,7 +2,6 @@ package com.springmvc.dao.mappers;
 
 import com.springmvc.entities.Employee;
 import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

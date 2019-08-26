@@ -1,10 +1,9 @@
 package com.springmvc.services.impl;
 
-import com.springmvc.entities.Employee;
 import com.springmvc.dao.EmployeeDAO;
+import com.springmvc.entities.Employee;
 import com.springmvc.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
-    @Qualifier("jpa")
     private EmployeeDAO employeeRepository;
 
     @Override
@@ -37,6 +35,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployee(Employee employee) {
-        employeeRepository.update(employee.getEmployeeId() ,employee);
+        employeeRepository.update(employee.getEmployeeId(), employee);
     }
 }

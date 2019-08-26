@@ -9,19 +9,20 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository()
-@Qualifier("jpa")
+@Repository
+@Primary
 @CacheConfig(cacheNames = "users")
 public class UserDAOHibernateImpl implements UserDAO {
     Logger logger = LoggerFactory.getLogger(UserDAOHibernateImpl.class);
+
     @Autowired
     private SessionFactory sessionFactory;
 

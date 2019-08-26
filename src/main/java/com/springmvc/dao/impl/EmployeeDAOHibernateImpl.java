@@ -9,16 +9,16 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-@Qualifier("jpa")
+@Primary
 @CacheConfig(cacheNames = "employees")
 public class EmployeeDAOHibernateImpl implements EmployeeDAO {
     Logger logger = LoggerFactory.getLogger(EmployeeDAOHibernateImpl.class);
@@ -48,7 +48,7 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
             String sql = "SELECT e FROM Employee e WHERE e.id = :id";
             query = session.createQuery(sql);
             query.setParameter("id", id);
-            logger.info(query.toString()    );
+            logger.info(query.toString());
             return (Employee) query.uniqueResult();
 
         } catch (Exception ex) {

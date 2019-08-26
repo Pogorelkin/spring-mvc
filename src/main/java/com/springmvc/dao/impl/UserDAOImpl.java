@@ -1,8 +1,8 @@
 package com.springmvc.dao.impl;
 
-import com.springmvc.entities.User;
 import com.springmvc.dao.UserDAO;
 import com.springmvc.dao.mappers.UserMapper;
+import com.springmvc.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;

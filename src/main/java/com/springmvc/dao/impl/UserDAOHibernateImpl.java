@@ -3,11 +3,11 @@ package com.springmvc.dao.impl;
 import com.springmvc.dao.UserDAO;
 import com.springmvc.entities.User;
 import com.springmvc.exceptions.DAOException;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -21,7 +21,7 @@ import java.util.List;
 @Primary
 @CacheConfig(cacheNames = "users")
 public class UserDAOHibernateImpl implements UserDAO {
-    Logger logger = LoggerFactory.getLogger(UserDAOHibernateImpl.class);
+    Logger logger = LogManager.getLogger(UserDAOHibernateImpl.class);
 
     @Autowired
     private SessionFactory sessionFactory;

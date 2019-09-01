@@ -17,7 +17,6 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableCaching
 @ComponentScan(basePackages = {"com.springmvc"})
 public class WebConfig implements WebMvcConfigurer {
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/WEB-INF/jsp/**").addResourceLocations("/jsp/");
@@ -29,13 +28,11 @@ public class WebConfig implements WebMvcConfigurer {
         resolver.setPrefix("/WEB-INF/jsp/");
         resolver.setSuffix(".jsp");
         resolver.setViewClass(JstlView.class);
-
         return resolver;
     }
 
     @Bean
     public CacheManager cacheManager() {
         return new ConcurrentMapCacheManager("employees");
-
     }
 }

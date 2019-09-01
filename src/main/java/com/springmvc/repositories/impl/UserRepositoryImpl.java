@@ -2,44 +2,46 @@ package com.springmvc.repositories.impl;
 
 import com.springmvc.entities.User;
 import com.springmvc.repositories.UserRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.springmvc.counter.AtomicCounter.userCounter;
-
 @Repository
+@Cacheable("users")
 public class UserRepositoryImpl implements UserRepository {
     private List<User> userList = Collections.synchronizedList(new ArrayList<>());
 
+    @CacheEvict
     @Override
-    public void addUser(User user) {
-        userList.add(user);
+    public void add(User object) {
+        userList.add(object);
     }
 
+    @Cacheable
     @Override
-    public List<User> getAllUsers() {
+    public List<User> getAll() {
         return userList;
     }
 
+    @Cacheable(key = "#id")
     @Override
-    public User getUserById(int id) {
-        return userList.get(id);
+    public User getById(long id) {
+        return userList.get((int) id);
     }
 
+    @CacheEvict
     @Override
-    public void deleteUserById(int id) {
-        userList.remove(id);
+    public void update(User object) {
+        userList.set((int) object.getUserId(), object);
     }
 
+    @CacheEvict
     @Override
-    @PostConstruct
-    public void initUsers() {
-        userList.add(new User(userCounter.getAndIncrement(), "login1", "password1"));
-        userList.add(new User(userCounter.getAndIncrement(), "maLoGiN", "P@ssW0rD"));
-        userList.add(new User(userCounter.getAndIncrement(), "1ogin", "123123"));
+    public void delete(User object) {
+        userList.remove(object);
     }
 }

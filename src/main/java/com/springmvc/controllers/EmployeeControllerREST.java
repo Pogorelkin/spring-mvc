@@ -16,28 +16,29 @@ public class EmployeeControllerREST {
 
     @GetMapping("/{employeeId}")
     private Employee getEmployee(@PathVariable int employeeId) {
-        return employeeService.getEmployeeById(employeeId);
+        return employeeService.getById(employeeId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     private void addEmployee(@RequestBody Employee employee) {
-        employeeService.addEmployee(employee);
+        employeeService.add(employee);
     }
 
     @PutMapping
     private void
     updateEmployee(@RequestBody Employee employee) {
-        employeeService.updateEmployee(employee);
+        employeeService.update(employee);
     }
 
-    @DeleteMapping("/{employeeId}")
-    private void deleteEmployee(@PathVariable int employeeId) {
-        employeeService.deleteEmployeeById(employeeId);
+    @DeleteMapping()
+    @ResponseStatus(HttpStatus.OK)
+    private void deleteEmployee(@RequestBody Employee employee) {
+        employeeService.delete(employee);
     }
 
     @GetMapping("/all")
     private List<Employee> getEmployees() {
-        return employeeService.getAllEmployees();
+        return employeeService.getAll();
     }
 }

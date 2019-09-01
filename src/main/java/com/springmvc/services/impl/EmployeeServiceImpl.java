@@ -14,27 +14,27 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public void addEmployee(Employee employee) {
-        employeeRepository.addEmployee(employee);
+    public void add(Employee employee) {
+        employeeRepository.add(employee);
     }
 
     @Override
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.getAllEmployees();
+    public List<Employee> getAll() {
+        return employeeRepository.getAll();
     }
 
     @Override
-    public Employee getEmployeeById(int id) {
-        return employeeRepository.getEmployeeById(id);
+    public Employee getById(long id) {
+        return employeeRepository.getById(id);
     }
 
     @Override
-    public void deleteEmployeeById(int id) {
-        employeeRepository.deleteEmployeeById(id);
+    public void update(Employee object) {
+        employeeRepository.update(object);
     }
 
     @Override
-    public void updateEmployee(Employee employee) {
-        employeeRepository.updateEmployee(employee);
+    public void delete(Employee object) {
+        employeeRepository.delete(object);
     }
 }

@@ -57,6 +57,6 @@ public class SpringRestControllerTest extends AbstractJUnit4SpringContextTests {
                 .param("lastName", employee.getLastName())
                 .param("idCardNumber", String.valueOf(employee.getIdCardNumber())))
                 .andExpect(status().isFound());
-        assertNotNull(employeeService.getEmployeeById(4));
+        assertNotNull(employeeService.getById(4));
     }
 }

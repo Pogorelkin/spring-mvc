@@ -5,10 +5,7 @@ import com.springmvc.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -20,7 +17,7 @@ public class EmployeeController {
     @GetMapping
     private ModelAndView getEmployees() {
         ModelAndView modelAndView = new ModelAndView("employees");
-        modelAndView.addObject("employees", employeeService.getAllEmployees());
+        modelAndView.addObject("employees", employeeService.getAll());
         return modelAndView;
     }
 
@@ -29,9 +26,11 @@ public class EmployeeController {
         return new ModelAndView("add-employee");
     }
 
-    @GetMapping("/get")
-    private ModelAndView getEmployee() {
-        return new ModelAndView("get-employee");
+    @GetMapping("/get/${id}")
+    private ModelAndView getEmployee(@PathVariable long id) {
+        ModelAndView modelAndView = new ModelAndView("get-employee");
+        modelAndView.addObject(employeeService.getById(id));
+        return modelAndView;
     }
 
     @GetMapping("/update")
@@ -47,7 +46,7 @@ public class EmployeeController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     private ModelAndView postEmployee(Employee employee) {
-        employeeService.addEmployee(employee);
+        employeeService.add(employee);
         return new ModelAndView("redirect:/employees");
     }
 }

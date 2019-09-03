@@ -8,5 +8,4 @@ MYSQL_PASSWORD=password \
 MYSQL_DATABASE=springtaskDB
 
 ADD db-script.sql /docker-entrypoint-initdb.d/
-COPY db-script.sql /var/lib/mysql
 EXPOSE 3306

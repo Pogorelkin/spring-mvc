@@ -1,26 +1,15 @@
 version: '3.7'
 services:
-  spring-mvc:
+  web:
+    container_name: "spring-mvc"
     build: ./
-    networks:
-      custom: {}
     ports:
       - "8085:8080"
-    depends_on:
-      - db
 
   db:
     build: ./db
     container_name: db
-    networks:
-      custom:
-        aliases:
-            - "db"
     ports:
-      - "3307:3306"
-
-networks:
-  custom:
-    driver: bridge
+      - "3306:3306"
 
 

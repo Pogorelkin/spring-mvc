@@ -6,6 +6,4 @@ MAINTAINER Pog
 ENV MYSQL_ROOT_PASSWORD=password \
 MYSQL_PASSWORD=password \
 MYSQL_DATABASE=springtaskDB
-
 ADD db-script.sql /docker-entrypoint-initdb.d/
-EXPOSE 3306
